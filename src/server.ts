@@ -1,8 +1,8 @@
 import express, { urlencoded } from 'express';
 import 'dotenv/config';
 import cors from 'cors';
-import { mainRouter } from './routes/main';
 import helmet from 'helmet';
+import { mainRouter } from './routes/main';
 
 const server = express();
 server.use(helmet());
