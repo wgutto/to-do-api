@@ -1,7 +1,8 @@
 import { RequestHandler } from "express"
 
 export const loginController: RequestHandler = (req, res) => {
-    res.json({
-        message: "Acessou"
+    res.status(200).json({
+        user: req.user,
+        auth: req.authInfo
     })
 }
