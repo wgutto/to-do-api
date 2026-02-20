@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import { mainRouter } from './routes/main';
 import passport from 'passport';
 import { localStrategy } from './lib/passport/passport-local';
+import cookieParser from 'cookie-parser';
 
 const server = express();
 server.use(helmet());
@@ -12,6 +13,7 @@ server.use(cors());
 server.use(urlencoded({ extended: true }));
 server.disable('x-powered-by');
 server.use(express.json());
+server.use(cookieParser())
 
 passport.use(localStrategy)
 server.use(passport.initialize())

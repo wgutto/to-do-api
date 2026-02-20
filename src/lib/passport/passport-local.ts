@@ -4,21 +4,16 @@ import { createTokenByIdService } from "../../services/auth/createTokenByIdServi
 
 export const localStrategy = new LocalStrategy(
     { usernameField: "email", passwordField: "password" },
-    async (email: string, password: string, done) => {
+    async (email, password, done) => {
         try {
-            const user = await validateAccountService(email, password)
+            const result = await validateAccountService(email, password)
 
-            if (!user.success) {
-                return done(null, false, { message: user.error })
+            if (!result.success) {
+                return done(null, false, { message: result.error })
             }
 
-            if (user.success) {
-                const token = await createTokenByIdService(user.data.id)
-
-                done(null, {
-                    auth: { token },
-                    user: user.data
-                })
+            if (result.success) {
+                done(null, result.data)
             }
         } catch (error) {
             console.error("ERRO NO localStrategy ", error)
